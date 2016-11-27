@@ -1,6 +1,6 @@
 version: "Apple Swift version 3.0.1 (swiftlang-800.0.58.6 clang-800.0.42.1)"
 options: "bf1482f9d8b68d5dfcf48456c0144823"
-build_time: [533570560, 143672000]
+build_time: [533571211, 721550000]
 inputs:
-  "/Users/fukumoto/SimpleMessagesViewController/SimpleMessagesViewController/SimpleMessagesViewController.swift": [533570560, 0]
+  "/Users/fukumoto/SimpleMessagesViewController/SimpleMessagesViewController/SimpleMessagesViewController.swift": [533571211, 0]
   "/Users/fukumoto/SimpleMessagesViewController/SimpleMessagesViewController/AppDelegate.swift": [533569074, 0]

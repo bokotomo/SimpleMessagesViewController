@@ -22,7 +22,8 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             width: self.view.frame.width,
             height: self.view.frame.height - statusBarHeight
         )
-
+        
+        tableView.separatorColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
         self.view.addSubview(tableView)
@@ -34,25 +35,22 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルを作る
-        
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.textLabel?.text = "\(sampleMessages[indexPath.row])"
         
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return sampleMessages.count
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        //click cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 64
     }
 }
