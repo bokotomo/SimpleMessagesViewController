@@ -6,22 +6,22 @@ provides-nominal:
 provides-member:
 - ["C28SimpleMessagesViewController11AppDelegate", ""]
 provides-dynamic-lookup:
-- "window"
-- "applicationWillTerminate"
 - "application"
 - "applicationDidBecomeActive"
 - "applicationWillResignActive"
-- "applicationWillEnterForeground"
+- "window"
 - "applicationDidEnterBackground"
+- "applicationWillEnterForeground"
+- "applicationWillTerminate"
 depends-top-level:
-- !private "BooleanLiteralType"
-- "Bool"
-- "UIResponder"
-- "AppDelegate"
 - "UIApplication"
-- "UIApplicationLaunchOptionsKey"
-- "UIWindow"
+- "UIResponder"
+- "Bool"
 - "UIApplicationDelegate"
+- "UIWindow"
+- !private "BooleanLiteralType"
+- "UIApplicationLaunchOptionsKey"
+- "AppDelegate"
 depends-member:
 - ["Ps9AnyObject", "application"]
 - ["Ps9AnyObject", "applicationDidBecomeActive"]

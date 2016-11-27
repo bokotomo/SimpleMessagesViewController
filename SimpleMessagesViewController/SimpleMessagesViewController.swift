@@ -11,10 +11,14 @@ import UIKit
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    let sampleMessages = ["ref", "lplp", "fojfiew"]
+    let sampleMessages = ["hello", "ok", "yes!"]
+    var placeholderColor: UIColor?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        placeholderColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
+
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SimpleMessagesViewController.DismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -62,14 +66,14 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         )
         messageTextPlaceholder.text = "メッセージを入力"
         messageTextPlaceholder.font = UIFont.systemFont(ofSize: 16)
-        messageTextPlaceholder.textColor = UIColor(red: 230/255, green:230/255, blue: 230/255, alpha: 1)
+        messageTextPlaceholder.textColor = placeholderColor
         textMessageArea.addSubview(messageTextPlaceholder)
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
