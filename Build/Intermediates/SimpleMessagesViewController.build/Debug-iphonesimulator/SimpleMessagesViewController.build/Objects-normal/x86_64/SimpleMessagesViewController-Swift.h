@@ -143,7 +143,7 @@ SWIFT_CLASS("_TtC28SimpleMessagesViewController11AppDelegate")
 @class NSCoder;
 
 SWIFT_CLASS("_TtC28SimpleMessagesViewController28SimpleMessagesViewController")
-@interface SimpleMessagesViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface SimpleMessagesViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITextViewDelegate, UITableViewDelegate>
 @property (nonatomic, readonly) CGFloat statusBarHeight;
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull sampleMessages;
 - (void)viewDidLoad;
@@ -152,6 +152,7 @@ SWIFT_CLASS("_TtC28SimpleMessagesViewController28SimpleMessagesViewController")
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+- (void)DismissKeyboard;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
