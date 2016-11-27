@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		CD274A3D1DEB193200677BD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD274A3C1DEB193200677BD4 /* AppDelegate.swift */; };
-		CD274A3F1DEB193200677BD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD274A3E1DEB193200677BD4 /* ViewController.swift */; };
+		CD274A3F1DEB193200677BD4 /* SimpleMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD274A3E1DEB193200677BD4 /* SimpleMessagesViewController.swift */; };
 		CD274A421DEB193200677BD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD274A401DEB193200677BD4 /* Main.storyboard */; };
 		CD274A441DEB193200677BD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD274A431DEB193200677BD4 /* Assets.xcassets */; };
 		CD274A471DEB193200677BD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD274A451DEB193200677BD4 /* LaunchScreen.storyboard */; };
+		CD274A4F1DEB1BC900677BD4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CD274A4E1DEB1BC900677BD4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CD274A391DEB193200677BD4 /* SimpleMessagesViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleMessagesViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD274A3C1DEB193200677BD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD274A3E1DEB193200677BD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD274A3E1DEB193200677BD4 /* SimpleMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMessagesViewController.swift; sourceTree = "<group>"; };
 		CD274A411DEB193200677BD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD274A431DEB193200677BD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD274A461DEB193200677BD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD274A481DEB193200677BD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD274A4E1DEB1BC900677BD4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +40,7 @@
 		CD274A301DEB193100677BD4 = {
 			isa = PBXGroup;
 			children = (
+				CD274A4E1DEB1BC900677BD4 /* README.md */,
 				CD274A3B1DEB193200677BD4 /* SimpleMessagesViewController */,
 				CD274A3A1DEB193200677BD4 /* Products */,
 			);
@@ -55,7 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				CD274A3C1DEB193200677BD4 /* AppDelegate.swift */,
-				CD274A3E1DEB193200677BD4 /* ViewController.swift */,
+				CD274A3E1DEB193200677BD4 /* SimpleMessagesViewController.swift */,
 				CD274A401DEB193200677BD4 /* Main.storyboard */,
 				CD274A431DEB193200677BD4 /* Assets.xcassets */,
 				CD274A451DEB193200677BD4 /* LaunchScreen.storyboard */,
@@ -136,7 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD274A3F1DEB193200677BD4 /* ViewController.swift in Sources */,
+				CD274A4F1DEB1BC900677BD4 /* README.md in Sources */,
+				CD274A3F1DEB193200677BD4 /* SimpleMessagesViewController.swift in Sources */,
 				CD274A3D1DEB193200677BD4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

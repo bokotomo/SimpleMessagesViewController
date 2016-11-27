@@ -138,8 +138,8 @@ SWIFT_CLASS("_TtC28SimpleMessagesViewController11AppDelegate")
 @class NSBundle;
 @class NSCoder;
 
-SWIFT_CLASS("_TtC28SimpleMessagesViewController14ViewController")
-@interface ViewController : UIViewController
+SWIFT_CLASS("_TtC28SimpleMessagesViewController28SimpleMessagesViewController")
+@interface SimpleMessagesViewController : UIViewController
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
