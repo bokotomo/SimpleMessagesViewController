@@ -13,6 +13,7 @@
 		CD274A441DEB193200677BD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD274A431DEB193200677BD4 /* Assets.xcassets */; };
 		CD274A471DEB193200677BD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD274A451DEB193200677BD4 /* LaunchScreen.storyboard */; };
 		CD274A4F1DEB1BC900677BD4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CD274A4E1DEB1BC900677BD4 /* README.md */; };
+		CDE50A6B1DEEED250034D978 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE50A6A1DEEED250034D978 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CD274A461DEB193200677BD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD274A481DEB193200677BD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD274A4E1DEB1BC900677BD4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CDE50A6A1DEEED250034D978 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				CD274A3C1DEB193200677BD4 /* AppDelegate.swift */,
+				CDE50A6A1DEEED250034D978 /* MainViewController.swift */,
 				CD274A3E1DEB193200677BD4 /* SimpleMessagesViewController.swift */,
 				CD274A401DEB193200677BD4 /* Main.storyboard */,
 				CD274A431DEB193200677BD4 /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 				CD274A4F1DEB1BC900677BD4 /* README.md in Sources */,
 				CD274A3F1DEB193200677BD4 /* SimpleMessagesViewController.swift in Sources */,
 				CD274A3D1DEB193200677BD4 /* AppDelegate.swift in Sources */,
+				CDE50A6B1DEEED250034D978 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +309,7 @@
 				CD274A4D1DEB193200677BD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
