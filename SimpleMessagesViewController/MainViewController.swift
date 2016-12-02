@@ -11,21 +11,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
 
+    @IBOutlet weak var TableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tableView = UITableView()
-        tableView.frame = CGRect(
-            x: 0,
-            y: statusBarHeight,
-            width: self.view.frame.width,
-            height: self.view.frame.height - statusBarHeight
-        )
         
-        tableView.separatorColor = UIColor.clear
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.view.addSubview(tableView)
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,8 +27,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.textLabel?.text = "MessagePage"
-        
-        cell.selectionStyle = .none
         return cell
     }
     
@@ -46,7 +35,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //click cell
+        print("Ok")
+        let secondViewController = SimpleMessagesViewController()
+        self.navigationController?.pushViewController(secondViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

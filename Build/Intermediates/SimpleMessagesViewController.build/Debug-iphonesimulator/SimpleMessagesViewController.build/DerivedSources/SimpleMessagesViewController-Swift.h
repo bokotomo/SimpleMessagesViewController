@@ -145,6 +145,7 @@ SWIFT_CLASS("_TtC28SimpleMessagesViewController11AppDelegate")
 SWIFT_CLASS("_TtC28SimpleMessagesViewController18MainViewController")
 @interface MainViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, readonly) CGFloat statusBarHeight;
+@property (nonatomic, weak) IBOutlet UITableView * _Null_unspecified TableView;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
