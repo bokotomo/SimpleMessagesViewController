@@ -10,18 +10,19 @@ import UIKit
 
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
-    let sampleMessages: [[String: Any]] = [["id":"1", "name":"tomo", "text":"よろしく！どこに住んでいるの？^^", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!", "date":"2016/12/20 18:05:11"],
-                                           ["id":"1", "name":"tomo", "text":"I live in Shibuya", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "name":"taro", "text":"いいね！今度遊ぼう！", "date":"2016/12/20 18:05:11"],
-                                           ["id":"1", "name":"tomo", "text":"OK!", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "name":"taro", "text":"Good!", "date":"2016/12/20 18:05:11"],
-                                           ["id":"1", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "name":"taro", "text":"ok", "date":"2016/12/20 18:05:11"],
-                                           ["id":"1", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
-                                           ["id":"1", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"]]
+    let sampleMessages: [[String: Any]] = [["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"よろしく！どこに住んでいるの？^^", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"I live in Shibuya", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"いいね！今度遊ぼう！", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"OK!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"Good!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"]]
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    let textMessageHieght:CGFloat = 50
+    let textMessageHieght: CGFloat = 50
+    let userImgSize: CGFloat = 30
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
     var tableView: UITableView!
     var textMessageArea: UIView!
@@ -119,13 +120,14 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.selectionStyle = .none
-        
+
         if sampleMessages[indexPath.row]["id"] as! String == "1" {
+            
             let userText = UILabel()
             userText.frame = CGRect(
                 x: 10,
                 y: 10,
-                width: self.view.frame.size.width - 80,
+                width: self.view.frame.size.width - 100 - userImgSize,
                 height: 40
             )
             userText.text = "\(sampleMessages[indexPath.row]["text"]!)"
@@ -134,10 +136,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             userText.sizeToFit()
             userText.textColor = UIColor(red: 40/255, green:40/255, blue: 40/255, alpha: 1)
 
-
             let textBackArea = UIView()
             textBackArea.frame = CGRect(
-                x: 10,
+                x: userImgSize + 10,
                 y: 5,
                 width: userText.frame.size.width + 20,
                 height: userText.frame.size.height + 20
@@ -147,12 +148,26 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             cell.contentView.addSubview(textBackArea)
             textBackArea.addSubview(userText)
             
+            let imageview_area = UIView(frame: CGRect(x: 5, y: userText.frame.size.height - 5 , width: userImgSize, height: userImgSize))
+            let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: userImgSize, height: userImgSize))
+            let url_str: String = sampleMessages[indexPath.row]["img_url"] as! String
+            ServerProc().async_img(url: url_str, funcs: {(img: UIImage) in
+                imageview_area.layer.masksToBounds = true
+                imageview_area.layer.cornerRadius = self.userImgSize/2
+                imageview.image = img
+                
+                imageview.frame = CGRect(x: 0,y: 0 ,width: self.userImgSize,height: self.userImgSize)
+                cell.contentView.addSubview(imageview_area)
+                imageview_area.addSubview(imageview)
+            })
+
         }else{
+
             let userText = UILabel()
             userText.frame = CGRect(
                 x: 10,
                 y: 10,
-                width: self.view.frame.size.width - 80,
+                width: self.view.frame.size.width - 100 - userImgSize,
                 height: 40
             )
             userText.text = "\(sampleMessages[indexPath.row]["text"]!)"
@@ -163,7 +178,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
 
             let textBackArea = UIView()
             textBackArea.frame = CGRect(
-                x: self.view.frame.size.width - userText.frame.size.width - 30,
+                x: self.view.frame.size.width - userText.frame.size.width - 30 - userImgSize,
                 y: 5,
                 width: userText.frame.size.width + 20,
                 height: userText.frame.size.height + 20
@@ -172,6 +187,19 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             textBackArea.layer.cornerRadius = 10
             cell.contentView.addSubview(textBackArea)
             textBackArea.addSubview(userText)
+            
+            let imageview_area = UIView(frame: CGRect(x: self.view.frame.size.width - userImgSize - 5, y: userText.frame.size.height - 5, width: userImgSize, height: userImgSize))
+            let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: userImgSize, height: userImgSize))
+            let url_str: String = sampleMessages[indexPath.row]["img_url"] as! String
+            ServerProc().async_img(url: url_str, funcs: {(img: UIImage) in
+                imageview_area.layer.masksToBounds = true
+                imageview_area.layer.cornerRadius = self.userImgSize/2
+                imageview.image = img
+                
+                imageview.frame = CGRect(x: 0,y: 0 ,width: self.userImgSize,height: self.userImgSize)
+                cell.contentView.addSubview(imageview_area)
+                imageview_area.addSubview(imageview)
+            })
         }
 
         return cell
@@ -190,7 +218,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         userText.frame = CGRect(
             x: 10,
             y: 10,
-            width: self.view.frame.size.width - 50,
+            width: self.view.frame.size.width - 100 - userImgSize,
             height: 40
         )
         userText.text = "\(sampleMessages[indexPath.row]["text"]!)"
