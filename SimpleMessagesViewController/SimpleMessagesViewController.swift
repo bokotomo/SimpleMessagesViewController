@@ -10,13 +10,23 @@ import UIKit
 
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
+    let sampleMessages: [[String: Any]] = [["id":"1", "name":"tomo", "text":"よろしく！どこに住んでいるの？^^"],
+                                           ["id":"2", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!"],
+                                           ["id":"1", "name":"tomo", "text":"I live in Shibuya"],
+                                           ["id":"2", "name":"taro", "text":"いいね！今度遊ぼう！"],
+                                           ["id":"1", "name":"tomo", "text":"OK!"],
+                                           ["id":"2", "name":"taro", "text":"Good!"],
+                                           ["id":"1", "name":"tomo", "text":"ok"],
+                                           ["id":"2", "name":"taro", "text":"ok"],
+                                           ["id":"1", "name":"tomo", "text":"ok"],
+                                           ["id":"1", "name":"tomo", "text":"ok"]]
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    let sampleMessages = ["よろしく！どこに住んでいるの？^^", "Hello! I am living in Shinjuku but I will go to Asakusa next time!", "I live in Shibuya", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！"]
+    let textMessageHieght:CGFloat = 50
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
     var tableView: UITableView!
     var textMessageArea: UIView!
     var messageTextPlaceholder: UILabel!
-
+    var messageTextSendButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,9 +42,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             x: 0,
             y: statusBarHeight,
             width: self.view.frame.width,
-            height: self.view.frame.height - statusBarHeight
+            height: self.view.frame.height - statusBarHeight - textMessageHieght
         )
-        
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 40, right: 0)
         tableView.separatorColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,17 +53,18 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         textMessageArea = UIView()
         textMessageArea.frame = CGRect(
             x: 0,
-            y: self.view.frame.height - 50,
+            y: self.view.frame.height - textMessageHieght,
             width: self.view.frame.width,
-            height: 50
+            height: textMessageHieght
         )
+        textMessageArea.backgroundColor = UIColor.white
         self.view.addSubview(textMessageArea)
         
         let messageTextView = UITextView()
         messageTextView.frame = CGRect(
-            x: 0,
+            x: 5,
             y: 0,
-            width: self.view.frame.width,
+            width: textMessageArea.frame.size.width - 60,
             height: textMessageArea.frame.size.height
         )
         messageTextView.delegate = self
@@ -65,13 +76,28 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         messageTextPlaceholder.frame = CGRect(
             x: 10,
             y: 0,
-            width: self.view.frame.width - 20,
+            width: messageTextView.frame.size.width,
             height: textMessageArea.frame.size.height
         )
-        messageTextPlaceholder.text = "メッセージを入力してください"
+        messageTextPlaceholder.text = "New Message"
         messageTextPlaceholder.font = UIFont.systemFont(ofSize: 16)
         messageTextPlaceholder.textColor = placeholderColor
         textMessageArea.addSubview(messageTextPlaceholder)
+
+        messageTextSendButton = UIButton()
+        messageTextSendButton.frame = CGRect(
+            x: self.view.frame.size.width - 55,
+            y: 10,
+            width: 45,
+            height: 30
+        )
+        messageTextSendButton.setTitle("Send", for: UIControlState())
+        messageTextSendButton.backgroundColor = UIColor(red: 105/255, green:69/255, blue: 254/255, alpha: 1)
+        messageTextSendButton.setTitleColor(UIColor.white, for: UIControlState())
+        messageTextSendButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        messageTextSendButton.layer.cornerRadius = 5
+        messageTextSendButton.addTarget(self, action: #selector(SimpleMessagesViewController.sendTextMessageButton(_:)), for: .touchUpInside)
+        textMessageArea.addSubview(messageTextSendButton)
         
         let barLine = UIView()
         barLine.frame = CGRect(
@@ -93,7 +119,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.selectionStyle = .none
         
-        if indexPath.row%2 == 0 {
+        if sampleMessages[indexPath.row]["id"] as! String == "1" {
             let userText = UILabel()
             userText.frame = CGRect(
                 x: 10,
@@ -101,7 +127,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 width: self.view.frame.size.width - 80,
                 height: 40
             )
-            userText.text = "\(sampleMessages[indexPath.row])"
+            userText.text = "\(sampleMessages[indexPath.row]["text"]!)"
             userText.numberOfLines = 0
             userText.font = UIFont.systemFont(ofSize: 14)
             userText.sizeToFit()
@@ -128,7 +154,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 width: self.view.frame.size.width - 80,
                 height: 40
             )
-            userText.text = "\(sampleMessages[indexPath.row])"
+            userText.text = "\(sampleMessages[indexPath.row]["text"]!)"
             userText.numberOfLines = 0
             userText.font = UIFont.systemFont(ofSize: 14)
             userText.sizeToFit()
@@ -168,7 +194,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             width: self.view.frame.size.width - 50,
             height: 40
         )
-        userText.text = "\(sampleMessages[indexPath.row])"
+        userText.text = "\(sampleMessages[indexPath.row]["text"]!)"
         userText.numberOfLines = 0
         userText.font = UIFont.systemFont(ofSize: 14)
         userText.sizeToFit()
@@ -209,16 +235,6 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
 
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        //print("textViewShouldBeginEditing : \(textView.text)");
-        return true
-    }
-    
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        //print("textViewShouldEndEditing : \(textView.text)");
-        return true
-    }
-
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if(textView.text.characters.count > 750){
@@ -230,5 +246,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         
         return true
     }
-}
 
+    func sendTextMessageButton(_ button: UIButton!) {
+
+    }
+
+}

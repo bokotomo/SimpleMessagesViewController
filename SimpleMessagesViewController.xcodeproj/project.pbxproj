@@ -62,12 +62,20 @@
 				CD274A3C1DEB193200677BD4 /* AppDelegate.swift */,
 				CDE50A6A1DEEED250034D978 /* MainViewController.swift */,
 				CD274A3E1DEB193200677BD4 /* SimpleMessagesViewController.swift */,
+				CDD017DF1DF7AD28005DC46A /* SimpleMessanger */,
 				CD274A401DEB193200677BD4 /* Main.storyboard */,
 				CD274A431DEB193200677BD4 /* Assets.xcassets */,
 				CD274A451DEB193200677BD4 /* LaunchScreen.storyboard */,
 				CD274A481DEB193200677BD4 /* Info.plist */,
 			);
 			path = SimpleMessagesViewController;
+			sourceTree = "<group>";
+		};
+		CDD017DF1DF7AD28005DC46A /* SimpleMessanger */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SimpleMessanger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
