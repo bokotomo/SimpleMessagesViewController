@@ -22,7 +22,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                                            ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"]]
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     let textMessageHieght: CGFloat = 50
-    let userImgSize: CGFloat = 30
+    let userImgSize: CGFloat = 35
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
     var tableView: UITableView!
     var textMessageArea: UIView!
@@ -126,7 +126,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             let userText = UILabel()
             userText.frame = CGRect(
                 x: 10,
-                y: 10,
+                y: 8.75,
                 width: self.view.frame.size.width - 100 - userImgSize,
                 height: 40
             )
@@ -141,14 +141,14 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 x: userImgSize + 10,
                 y: 5,
                 width: userText.frame.size.width + 20,
-                height: userText.frame.size.height + 20
+                height: userText.frame.size.height + 17.5
             )
             textBackArea.backgroundColor = UIColor(red: 245/255, green:245/255, blue: 245/255, alpha: 1)
             textBackArea.layer.cornerRadius = 10
             cell.contentView.addSubview(textBackArea)
             textBackArea.addSubview(userText)
             
-            let imageview_area = UIView(frame: CGRect(x: 5, y: userText.frame.size.height - 5 , width: userImgSize, height: userImgSize))
+            let imageview_area = UIView(frame: CGRect(x: 5, y: 5 + textBackArea.frame.size.height - userImgSize , width: userImgSize, height: userImgSize))
             let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: userImgSize, height: userImgSize))
             let url_str: String = sampleMessages[indexPath.row]["img_url"] as! String
             ServerProc().async_img(url: url_str, funcs: {(img: UIImage) in
@@ -166,7 +166,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             let userText = UILabel()
             userText.frame = CGRect(
                 x: 10,
-                y: 10,
+                y: 8.75,
                 width: self.view.frame.size.width - 100 - userImgSize,
                 height: 40
             )
@@ -181,14 +181,14 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 x: self.view.frame.size.width - userText.frame.size.width - 30 - userImgSize,
                 y: 5,
                 width: userText.frame.size.width + 20,
-                height: userText.frame.size.height + 20
+                height: userText.frame.size.height + 17.5
             )
             textBackArea.backgroundColor = UIColor(red: 105/255, green:69/255, blue: 254/255, alpha: 1)
             textBackArea.layer.cornerRadius = 10
             cell.contentView.addSubview(textBackArea)
             textBackArea.addSubview(userText)
             
-            let imageview_area = UIView(frame: CGRect(x: self.view.frame.size.width - userImgSize - 5, y: userText.frame.size.height - 5, width: userImgSize, height: userImgSize))
+            let imageview_area = UIView(frame: CGRect(x: self.view.frame.size.width - userImgSize - 5, y: 5 + textBackArea.frame.size.height - userImgSize , width: userImgSize, height: userImgSize))
             let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: userImgSize, height: userImgSize))
             let url_str: String = sampleMessages[indexPath.row]["img_url"] as! String
             ServerProc().async_img(url: url_str, funcs: {(img: UIImage) in
@@ -217,7 +217,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         let userText = UILabel()
         userText.frame = CGRect(
             x: 10,
-            y: 10,
+            y: 8.75,
             width: self.view.frame.size.width - 100 - userImgSize,
             height: 40
         )
@@ -225,7 +225,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         userText.numberOfLines = 0
         userText.font = UIFont.systemFont(ofSize: 14)
         userText.sizeToFit()
-        return userText.frame.size.height + 30
+        return userText.frame.size.height + 35
     }
 
     func dismissKeyBoard(){
