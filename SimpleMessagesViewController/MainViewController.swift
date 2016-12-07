@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
+    let messageSmapleType: [[String:Any]] = [["type":"1"], ["type":"2"], ["type":"3"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +35,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.textLabel?.text = "MessageViewPage"
+        cell.textLabel?.text = "MessageSamplePage\(messageSmapleType[indexPath.row]["type"]!)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return messageSmapleType.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -48,7 +49,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 60
     }
 
 }

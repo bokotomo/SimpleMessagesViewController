@@ -10,16 +10,16 @@ import UIKit
 
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
-    let sampleMessages: [[String: Any]] = [["id":"1", "name":"tomo", "text":"よろしく！どこに住んでいるの？^^"],
-                                           ["id":"2", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!"],
-                                           ["id":"1", "name":"tomo", "text":"I live in Shibuya"],
-                                           ["id":"2", "name":"taro", "text":"いいね！今度遊ぼう！"],
-                                           ["id":"1", "name":"tomo", "text":"OK!"],
-                                           ["id":"2", "name":"taro", "text":"Good!"],
-                                           ["id":"1", "name":"tomo", "text":"ok"],
-                                           ["id":"2", "name":"taro", "text":"ok"],
-                                           ["id":"1", "name":"tomo", "text":"ok"],
-                                           ["id":"1", "name":"tomo", "text":"ok"]]
+    let sampleMessages: [[String: Any]] = [["id":"1", "name":"tomo", "text":"よろしく！どこに住んでいるの？^^", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "name":"tomo", "text":"I live in Shibuya", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "name":"taro", "text":"いいね！今度遊ぼう！", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "name":"tomo", "text":"OK!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "name":"taro", "text":"Good!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "name":"taro", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"]]
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     let textMessageHieght:CGFloat = 50
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
@@ -27,6 +27,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     var textMessageArea: UIView!
     var messageTextPlaceholder: UILabel!
     var messageTextSendButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -159,8 +160,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             userText.font = UIFont.systemFont(ofSize: 14)
             userText.sizeToFit()
             userText.textColor = UIColor(red: 255/255, green:255/255, blue: 255/255, alpha: 1)
-            
-            
+
             let textBackArea = UIView()
             textBackArea.frame = CGRect(
                 x: self.view.frame.size.width - userText.frame.size.width - 30,
@@ -173,7 +173,6 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             cell.contentView.addSubview(textBackArea)
             textBackArea.addSubview(userText)
         }
-
 
         return cell
     }
