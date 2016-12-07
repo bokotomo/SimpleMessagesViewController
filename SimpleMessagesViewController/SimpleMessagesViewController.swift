@@ -11,7 +11,7 @@ import UIKit
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    let sampleMessages = ["よろしく！どこに住んでいるの？^^", "Hello! I am living in Shinjuku but I will go to Asakusa next time!", "I live in Shibuya", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！"]
+    let sampleMessages = ["よろしく！どこに住んでいるの？^^", "Hello! I am living in Shinjuku but I will go to Asakusa next time!", "I live in Shibuya", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！"]
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
     var tableView: UITableView!
     var textMessageArea: UIView!

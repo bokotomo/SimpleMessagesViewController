@@ -11,7 +11,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,4 +52,3 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 }
-
