@@ -12,7 +12,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
 
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     let sampleMessages = ["よろしく！どこに住んでいるの？^^", "Hello! I am living in Shinjuku but I will go to Asakusa next time!", "I live in Shibuya", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！"]
-    var placeholderColor: UIColor? = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
+    let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
     var tableView: UITableView!
     var textMessageArea: UIView!
     var messageTextPlaceholder: UILabel!
@@ -43,9 +43,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         textMessageArea = UIView()
         textMessageArea.frame = CGRect(
             x: 0,
-            y: self.view.frame.height - 60,
+            y: self.view.frame.height - 50,
             width: self.view.frame.width,
-            height: 60
+            height: 50
         )
         self.view.addSubview(textMessageArea)
         
@@ -186,7 +186,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             
             self.tableView.frame.origin.y = -(keyboardRect?.size.height)!
 
-            self.textMessageArea.frame.origin.y = self.view.frame.height - 60  - (keyboardRect?.size.height)!
+            self.textMessageArea.frame.origin.y = self.view.frame.height - 50  - (keyboardRect?.size.height)!
            
         }, completion: nil)
         
@@ -196,7 +196,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         
         UIView.animate(withDuration: 0.25, animations: {
             self.tableView.frame.origin.y = self.statusBarHeight
-            self.textMessageArea.frame.origin.y = self.view.frame.height - 60
+            self.textMessageArea.frame.origin.y = self.view.frame.height - 50
         }, completion: nil)
     }
 

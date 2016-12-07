@@ -164,7 +164,7 @@ SWIFT_CLASS("_TtC28SimpleMessagesViewController28SimpleMessagesViewController")
 @interface SimpleMessagesViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITextViewDelegate, UITableViewDelegate>
 @property (nonatomic, readonly) CGFloat statusBarHeight;
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull sampleMessages;
-@property (nonatomic, strong) UIColor * _Nullable placeholderColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull placeholderColor;
 @property (nonatomic, strong) UITableView * _Null_unspecified tableView;
 @property (nonatomic, strong) UIView * _Null_unspecified textMessageArea;
 @property (nonatomic, strong) UILabel * _Null_unspecified messageTextPlaceholder;
