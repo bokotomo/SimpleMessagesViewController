@@ -156,19 +156,31 @@ SWIFT_CLASS("_TtC28SimpleMessagesViewController18MainViewController")
 @end
 
 @class UIColor;
+@class UIView;
+@class UILabel;
+@class UITextView;
 
 SWIFT_CLASS("_TtC28SimpleMessagesViewController28SimpleMessagesViewController")
 @interface SimpleMessagesViewController : UIViewController <UIScrollViewDelegate, UITableViewDataSource, UITextViewDelegate, UITableViewDelegate>
 @property (nonatomic, readonly) CGFloat statusBarHeight;
 @property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull sampleMessages;
 @property (nonatomic, strong) UIColor * _Nullable placeholderColor;
+@property (nonatomic, strong) UITableView * _Null_unspecified tableView;
+@property (nonatomic, strong) UIView * _Null_unspecified textMessageArea;
+@property (nonatomic, strong) UILabel * _Null_unspecified messageTextPlaceholder;
 - (void)viewDidLoad;
 - (void)didReceiveMemoryWarning;
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
-- (void)DismissKeyboard;
+- (void)dismissKeyBoard;
+- (void)showKeyboard:(NSNotification * _Nonnull)notification;
+- (void)hideKeyboard:(NSNotification * _Nonnull)notification;
+- (void)textViewDidChange:(UITextView * _Nonnull)textView;
+- (BOOL)textViewShouldBeginEditing:(UITextView * _Nonnull)textView;
+- (BOOL)textViewShouldEndEditing:(UITextView * _Nonnull)textView;
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString * _Nonnull)text;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end

@@ -11,19 +11,23 @@ import UIKit
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    let sampleMessages = ["よろしく！どこに住んでいるの？^^", "Hello! I am living in Shinjuku but I will go to Asakusa next time!", "I live in Shibuya", "いいね！今度遊ぼう！"]
-    var placeholderColor: UIColor?
+    let sampleMessages = ["よろしく！どこに住んでいるの？^^", "Hello! I am living in Shinjuku but I will go to Asakusa next time!", "I live in Shibuya", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！", "いいね！今度遊ぼう！"]
+    var placeholderColor: UIColor? = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
+    var tableView: UITableView!
+    var textMessageArea: UIView!
+    var messageTextPlaceholder: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        placeholderColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
 
+        NotificationCenter.default.addObserver(self, selector: #selector(SimpleMessagesViewController.showKeyboard(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SimpleMessagesViewController.DismissKeyboard))
+        NotificationCenter.default.addObserver(self, selector: #selector(SimpleMessagesViewController.hideKeyboard(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SimpleMessagesViewController.dismissKeyBoard))
         view.addGestureRecognizer(tap)
 
-        let tableView = UITableView()
+        tableView = UITableView()
         tableView.frame = CGRect(
             x: 0,
             y: statusBarHeight,
@@ -36,7 +40,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         self.view.addSubview(tableView)
 
-        let textMessageArea = UIView()
+        textMessageArea = UIView()
         textMessageArea.frame = CGRect(
             x: 0,
             y: self.view.frame.height - 60,
@@ -57,7 +61,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         textMessageArea.addSubview(messageTextView)
     
         
-        let messageTextPlaceholder = UILabel()
+        messageTextPlaceholder = UILabel()
         messageTextPlaceholder.frame = CGRect(
             x: 10,
             y: 0,
@@ -94,7 +98,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             userText.frame = CGRect(
                 x: 10,
                 y: 10,
-                width: self.view.frame.size.width - 50,
+                width: self.view.frame.size.width - 80,
                 height: 40
             )
             userText.text = "\(sampleMessages[indexPath.row])"
@@ -121,7 +125,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             userText.frame = CGRect(
                 x: 10,
                 y: 10,
-                width: self.view.frame.size.width - 50,
+                width: self.view.frame.size.width - 80,
                 height: 40
             )
             userText.text = "\(sampleMessages[indexPath.row])"
@@ -171,8 +175,60 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         return userText.frame.size.height + 30
     }
 
-    func DismissKeyboard(){
+    func dismissKeyBoard(){
         view.endEditing(true)
+    }
+
+    func showKeyboard(_ notification: Foundation.Notification) {
+
+        let keyboardRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        UIView.animate(withDuration: 0.25, animations: {
+            
+            self.tableView.frame.origin.y = -(keyboardRect?.size.height)!
+
+            self.textMessageArea.frame.origin.y = self.view.frame.height - 60  - (keyboardRect?.size.height)!
+           
+        }, completion: nil)
+        
+    }
+
+    func hideKeyboard(_ notification: Foundation.Notification) {
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            self.tableView.frame.origin.y = self.statusBarHeight
+            self.textMessageArea.frame.origin.y = self.view.frame.height - 60
+        }, completion: nil)
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if(textView.text.isEmpty == false){
+            messageTextPlaceholder.isHidden = true
+        }else{
+            messageTextPlaceholder.isHidden = false
+        }
+    }
+
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        //print("textViewShouldBeginEditing : \(textView.text)");
+        return true
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        //print("textViewShouldEndEditing : \(textView.text)");
+        return true
+    }
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        if(textView.text.characters.count > 750){
+            return false
+        }
+        if( text == "\n"){
+            
+        }
+        
+        return true
     }
 }
 
