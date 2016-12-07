@@ -11,13 +11,13 @@ import UIKit
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
     let sampleMessages: [[String: Any]] = [["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"よろしく！どこに住んでいるの？^^", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/car.jpg", "name":"taro", "text":"Hello! I am living in Shinjuku but I will go to Asakusa next time!", "date":"2016/12/20 18:05:11"],
                                            ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"I live in Shibuya", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"いいね！今度遊ぼう！", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/car.jpg", "name":"taro", "text":"いいね！今度遊ぼう！", "date":"2016/12/20 18:05:11"],
                                            ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"OK!", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"Good!", "date":"2016/12/20 18:05:11"],
-                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
-                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"taro", "text":"ok", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/car.jpg", "name":"taro", "text":"Do you want something to eat?", "date":"2016/12/20 18:05:11"],
+                                           ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"Udon!", "date":"2016/12/20 18:05:11"],
+                                           ["id":"2", "img_url":"https://tomo.syo.tokyo/openimg/car.jpg", "name":"taro", "text":"ok", "date":"2016/12/20 18:05:11"],
                                            ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"],
                                            ["id":"1", "img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "text":"ok", "date":"2016/12/20 18:05:11"]]
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
@@ -65,9 +65,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         let messageTextView = UITextView()
         messageTextView.frame = CGRect(
             x: 5,
-            y: 0,
+            y: 7.5,
             width: textMessageArea.frame.size.width - 60,
-            height: textMessageArea.frame.size.height
+            height: textMessageArea.frame.size.height - 7.5
         )
         messageTextView.delegate = self
         messageTextView.font = UIFont.systemFont(ofSize: 16)
@@ -125,7 +125,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             
             let userText = UILabel()
             userText.frame = CGRect(
-                x: 10,
+                x: 8.75,
                 y: 8.75,
                 width: self.view.frame.size.width - 100 - userImgSize,
                 height: 40
@@ -140,7 +140,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             textBackArea.frame = CGRect(
                 x: userImgSize + 10,
                 y: 5,
-                width: userText.frame.size.width + 20,
+                width: userText.frame.size.width + 17.5,
                 height: userText.frame.size.height + 17.5
             )
             textBackArea.backgroundColor = UIColor(red: 245/255, green:245/255, blue: 245/255, alpha: 1)
@@ -165,7 +165,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
 
             let userText = UILabel()
             userText.frame = CGRect(
-                x: 10,
+                x: 8.75,
                 y: 8.75,
                 width: self.view.frame.size.width - 100 - userImgSize,
                 height: 40
@@ -178,9 +178,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
 
             let textBackArea = UIView()
             textBackArea.frame = CGRect(
-                x: self.view.frame.size.width - userText.frame.size.width - 30 - userImgSize,
+                x: self.view.frame.size.width - userText.frame.size.width - 27.5 - userImgSize,
                 y: 5,
-                width: userText.frame.size.width + 20,
+                width: userText.frame.size.width + 17.5,
                 height: userText.frame.size.height + 17.5
             )
             textBackArea.backgroundColor = UIColor(red: 105/255, green:69/255, blue: 254/255, alpha: 1)
@@ -216,7 +216,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let userText = UILabel()
         userText.frame = CGRect(
-            x: 10,
+            x: 8.75,
             y: 8.75,
             width: self.view.frame.size.width - 100 - userImgSize,
             height: 40
@@ -277,5 +277,4 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     func sendTextMessageButton(_ button: UIButton!) {
 
     }
-
 }
