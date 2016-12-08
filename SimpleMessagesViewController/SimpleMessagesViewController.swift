@@ -10,7 +10,7 @@ import UIKit
 
 class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate{
 
-    let sampleMessages: [[String: Any]] = [["id":"1", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "contents":"Hello,where do you live?", "date":"2016/12/20 18:05:11"],
+    var sampleMessages: [[String: Any]] = [["id":"1", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "contents":"Hello,where do you live?", "date":"2016/12/20 18:05:11"],
                                            ["id":"2", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/car.jpg", "name":"taro", "contents":"Hello! I'm living in Shinjuku but I will go to Asakusa next time!", "date":"2016/12/20 18:05:11"],
                                            ["id":"1", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "contents":"I live in Shibuya", "date":"2016/12/20 18:05:11"],
                                            ["id":"2", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/car.jpg", "name":"taro", "contents":"Let's play next time:)", "date":"2016/12/20 18:05:11"],
@@ -28,6 +28,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     var tableView: UITableView!
     var textMessageArea: UIView!
     var messageTextPlaceholder: UILabel!
+    var messageTextView: UITextView!
     var messageTextSendButton: UIButton!
 
     override func viewDidLoad() {
@@ -63,7 +64,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         textMessageArea.backgroundColor = UIColor.white
         self.view.addSubview(textMessageArea)
         
-        let messageTextView = UITextView()
+        messageTextView = UITextView()
         messageTextView.frame = CGRect(
             x: 5,
             y: 7.5,
@@ -123,7 +124,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         cell.selectionStyle = .none
         let messageType: String = sampleMessages[indexPath.row]["type"] as! String
 
-        if sampleMessages[indexPath.row]["id"] as! String == "1" {
+        if sampleMessages[indexPath.row]["id"] as! String != "1" {
             if messageType == "text" {
                 let userText = UILabel()
                 userText.frame = CGRect(
@@ -164,7 +165,32 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 })
 
             }else if messageType == "image" {
-            
+                let imageview_area2 = UIView(frame: CGRect(x: userImgSize + 10, y: 5, width: imageMessageSize, height: imageMessageSize))
+                let imageview2 = UIImageView(frame: CGRect(x: 0, y: 0, width: imageMessageSize, height: imageMessageSize))
+                let url_str2: String = sampleMessages[indexPath.row]["contents"] as! String
+                ServerProc().async_img(url: url_str2, funcs: {(img: UIImage) in
+                    imageview_area2.layer.masksToBounds = true
+                    imageview_area2.layer.cornerRadius = 10
+                    imageview2.image = img
+                    
+                    imageview2.frame = CGRect(x: 0,y: 0 ,width: self.imageMessageSize, height: self.imageMessageSize)
+                    cell.contentView.addSubview(imageview_area2)
+                    imageview_area2.addSubview(imageview2)
+                })
+                
+                let imageview_area = UIView(frame: CGRect(x: 5, y: 5 + imageMessageSize - userImgSize , width: userImgSize, height: userImgSize))
+                let imageview = UIImageView(frame: CGRect(x: 0, y: 0, width: userImgSize, height: userImgSize))
+                let url_str: String = sampleMessages[indexPath.row]["user_img_url"] as! String
+                ServerProc().async_img(url: url_str, funcs: {(img: UIImage) in
+                    imageview_area.layer.masksToBounds = true
+                    imageview_area.layer.cornerRadius = self.userImgSize/2
+                    imageview.image = img
+                    
+                    imageview.frame = CGRect(x: 0,y: 0 ,width: self.userImgSize,height: self.userImgSize)
+                    cell.contentView.addSubview(imageview_area)
+                    imageview_area.addSubview(imageview)
+                })
+
             }
             
         }else{
@@ -320,6 +346,14 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func sendTextMessageButton(_ button: UIButton!) {
-
+        if(messageTextView.text != ""){
+            let messageText:[String : Any] = ["id":"1", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "contents":messageTextView.text, "date":"2016/12/20 18:05:11"]
+            sampleMessages.append(messageText)
+            messageTextView.text = ""
+            messageTextPlaceholder.isHidden = false
+            tableView.reloadData()
+            let indexPath = IndexPath(row:sampleMessages.count - 1, section: 0)
+            tableView.scrollToRow(at: indexPath, at:UITableViewScrollPosition.top , animated: false)
+        }
     }
 }
