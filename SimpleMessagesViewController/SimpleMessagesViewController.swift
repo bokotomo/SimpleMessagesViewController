@@ -24,7 +24,12 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     let textMessageHieght: CGFloat = 50
     let imageMessageSize: CGFloat = 200
     let userImgSize: CGFloat = 35
+    var myUserId: String!
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
+    let messgaeOtherUserBackgroundColor: UIColor = UIColor(red: 245/255, green:245/255, blue: 245/255, alpha: 1)
+    let messgaeOtherUserTextColor: UIColor = UIColor(red: 40/255, green:40/255, blue: 40/255, alpha: 1)
+    let messgaeMyUserBackgroundColor: UIColor = UIColor(red: 105/255, green:69/255, blue: 254/255, alpha: 1)
+    let messgaeMyUserTextColor: UIColor = UIColor(red: 255/255, green:255/255, blue: 255/255, alpha: 1)
     var tableView: UITableView!
     var textMessageArea: UIView!
     var messageTextPlaceholder: UILabel!
@@ -112,6 +117,8 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         )
         barLine.backgroundColor = UIColor(red: 230/255, green:230/255, blue: 230/255, alpha: 1)
         textMessageArea.addSubview(barLine)
+        
+        myUserId = "1"
     }
 
     override func didReceiveMemoryWarning() {
@@ -124,7 +131,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         cell.selectionStyle = .none
         let messageType: String = sampleMessages[indexPath.row]["type"] as! String
 
-        if sampleMessages[indexPath.row]["id"] as! String != "1" {
+        if sampleMessages[indexPath.row]["id"] as? String != myUserId {
             if messageType == "text" {
                 let userText = UILabel()
                 userText.frame = CGRect(
@@ -137,7 +144,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 userText.numberOfLines = 0
                 userText.font = UIFont.systemFont(ofSize: 14)
                 userText.sizeToFit()
-                userText.textColor = UIColor(red: 40/255, green:40/255, blue: 40/255, alpha: 1)
+                userText.textColor = messgaeOtherUserTextColor
 
                 let textBackArea = UIView()
                 textBackArea.frame = CGRect(
@@ -146,7 +153,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                     width: userText.frame.size.width + 17.5,
                     height: userText.frame.size.height + 17.5
                 )
-                textBackArea.backgroundColor = UIColor(red: 245/255, green:245/255, blue: 245/255, alpha: 1)
+                textBackArea.backgroundColor = messgaeOtherUserBackgroundColor
                 textBackArea.layer.cornerRadius = 10
                 cell.contentView.addSubview(textBackArea)
                 textBackArea.addSubview(userText)
@@ -207,7 +214,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                 userText.numberOfLines = 0
                 userText.font = UIFont.systemFont(ofSize: 14)
                 userText.sizeToFit()
-                userText.textColor = UIColor(red: 255/255, green:255/255, blue: 255/255, alpha: 1)
+                userText.textColor = messgaeMyUserTextColor
 
                 let textBackArea = UIView()
                 textBackArea.frame = CGRect(
@@ -216,7 +223,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                     width: userText.frame.size.width + 17.5,
                     height: userText.frame.size.height + 17.5
                 )
-                textBackArea.backgroundColor = UIColor(red: 105/255, green:69/255, blue: 254/255, alpha: 1)
+                textBackArea.backgroundColor = messgaeMyUserBackgroundColor
                 textBackArea.layer.cornerRadius = 10
                 cell.contentView.addSubview(textBackArea)
                 textBackArea.addSubview(userText)
@@ -308,7 +315,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         let keyboardRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         UIView.animate(withDuration: 0.25, animations: {
             
-            self.tableView.frame.origin.y = -(keyboardRect?.size.height)!
+            self.tableView.frame.origin.y = -(keyboardRect?.size.height)! + self.statusBarHeight
 
             self.textMessageArea.frame.origin.y = self.view.frame.height - 50  - (keyboardRect?.size.height)!
            
@@ -347,13 +354,23 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
 
     func sendTextMessageButton(_ button: UIButton!) {
         if(messageTextView.text != ""){
-            let messageText:[String : Any] = ["id":"1", "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "contents":messageTextView.text, "date":"2016/12/20 18:05:11"]
+            let nowClock: String = getNowClockString()
+            let messageText:[String : Any] = ["id":myUserId, "type":"text", "user_img_url":"https://tomo.syo.tokyo/openimg/shibuya.jpg", "name":"tomo", "contents":messageTextView.text, "date":nowClock]
             sampleMessages.append(messageText)
             messageTextView.text = ""
             messageTextPlaceholder.isHidden = false
             tableView.reloadData()
             let indexPath = IndexPath(row:sampleMessages.count - 1, section: 0)
             tableView.scrollToRow(at: indexPath, at:UITableViewScrollPosition.top , animated: false)
+            
+            view.endEditing(true)
         }
+    }
+
+    func getNowClockString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd' 'HH:mm:ss"
+        let now = Date()
+        return formatter.string(from: now)
     }
 }
