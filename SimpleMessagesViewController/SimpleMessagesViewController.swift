@@ -35,6 +35,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     var messageTextPlaceholder: UILabel!
     var messageTextView: UITextView!
     var messageTextSendButton: UIButton!
+    var MessageReturnNum : Int = 0
+    var tableAngle : Bool = true
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,8 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SimpleMessagesViewController.dismissKeyBoard))
         view.addGestureRecognizer(tap)
 
+
+        
         tableView = UITableView()
         tableView.frame = CGRect(
             x: 0,
@@ -332,23 +337,46 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     }
 
     func textViewDidChange(_ textView: UITextView) {
+        var kaigyoNum = 0
         
         if(textView.text.isEmpty == false){
-            messageTextPlaceholder.isHidden = true
+            if(messageTextPlaceholder.isHidden == false){
+                messageTextPlaceholder.isHidden =  true
+            }
         }else{
-            messageTextPlaceholder.isHidden = false
+            if(messageTextPlaceholder.isHidden == true){
+                messageTextPlaceholder.isHidden =  false
+            }
         }
+        
+        for c in textView.text.characters {
+            if(c == "\n"){
+                kaigyoNum += 1
+            }
+        }
+        
+        if(kaigyoNum < 3){
+            if(kaigyoNum > MessageReturnNum){
+                textMessageArea.frame.origin.y -= CGFloat(20)
+                textMessageArea.frame.size.height += CGFloat(20)
+                messageTextView.frame.size.height += CGFloat(20)
+                messageTextSendButton.frame.origin.y += CGFloat(20)
+            }else if(kaigyoNum < MessageReturnNum){
+                textMessageArea.frame.origin.y += CGFloat(20)
+                textMessageArea.frame.size.height -= CGFloat(20)
+                messageTextView.frame.size.height -= CGFloat(20)
+                messageTextSendButton.frame.origin.y -= CGFloat(20)
+            }
+            MessageReturnNum = kaigyoNum
+        }
+        
     }
-
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if(textView.text.characters.count > 750){
             return false
         }
-        if( text == "\n"){
-            
-        }
-        
         return true
     }
 
