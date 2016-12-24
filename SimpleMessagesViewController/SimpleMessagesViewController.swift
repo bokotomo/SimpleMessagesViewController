@@ -37,6 +37,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     var messageTextSendButton: UIButton!
     var MessageReturnNum : Int = 0
     var tableAngle : Bool = true
+    var MessageType : String!
     
 
     override func viewDidLoad() {
@@ -48,9 +49,10 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SimpleMessagesViewController.dismissKeyBoard))
         view.addGestureRecognizer(tap)
-
-
         
+        MessageType = "normal"
+        MessageType = "camera"
+
         tableView = UITableView()
         tableView.frame = CGRect(
             x: 0,
@@ -74,29 +76,67 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         textMessageArea.backgroundColor = UIColor.white
         self.view.addSubview(textMessageArea)
         
-        messageTextView = UITextView()
-        messageTextView.frame = CGRect(
-            x: 5,
-            y: 7.5,
-            width: textMessageArea.frame.size.width - 60,
-            height: textMessageArea.frame.size.height - 7.5
-        )
-        messageTextView.delegate = self
-        messageTextView.font = UIFont.systemFont(ofSize: 16)
-        textMessageArea.addSubview(messageTextView)
+        if MessageType == "normal" {
+            
+            messageTextView = UITextView()
+            messageTextView.frame = CGRect(
+                x: 5,
+                y: 7.5,
+                width: textMessageArea.frame.size.width - 60,
+                height: textMessageArea.frame.size.height - 7.5
+            )
+            messageTextView.delegate = self
+            messageTextView.font = UIFont.systemFont(ofSize: 16)
+            textMessageArea.addSubview(messageTextView)
+            
+            messageTextPlaceholder = UILabel()
+            messageTextPlaceholder.frame = CGRect(
+                x: 10,
+                y: 0,
+                width: messageTextView.frame.size.width,
+                height: textMessageArea.frame.size.height
+            )
+            messageTextPlaceholder.text = "New Message"
+            messageTextPlaceholder.font = UIFont.systemFont(ofSize: 16)
+            messageTextPlaceholder.textColor = placeholderColor
+            textMessageArea.addSubview(messageTextPlaceholder)
+            
+        }else if MessageType == "camera" {
+            
+            let plusImage = UIImageView()
+            plusImage.frame = CGRect(
+                x: 10,
+                y: 15,
+                width: 20,
+                height: 20
+            )
+            plusImage.image = UIImage(named: "plus")
+            textMessageArea.addSubview(plusImage)
     
-        
-        messageTextPlaceholder = UILabel()
-        messageTextPlaceholder.frame = CGRect(
-            x: 10,
-            y: 0,
-            width: messageTextView.frame.size.width,
-            height: textMessageArea.frame.size.height
-        )
-        messageTextPlaceholder.text = "New Message"
-        messageTextPlaceholder.font = UIFont.systemFont(ofSize: 16)
-        messageTextPlaceholder.textColor = placeholderColor
-        textMessageArea.addSubview(messageTextPlaceholder)
+            messageTextView = UITextView()
+            messageTextView.frame = CGRect(
+                x: 35,
+                y: 7.5,
+                width: textMessageArea.frame.size.width - 60 - 30,
+                height: textMessageArea.frame.size.height - 7.5
+            )
+            messageTextView.delegate = self
+            messageTextView.font = UIFont.systemFont(ofSize: 16)
+            textMessageArea.addSubview(messageTextView)
+            
+            messageTextPlaceholder = UILabel()
+            messageTextPlaceholder.frame = CGRect(
+                x: 40,
+                y: 0,
+                width: messageTextView.frame.size.width,
+                height: textMessageArea.frame.size.height
+            )
+            messageTextPlaceholder.text = "New Message"
+            messageTextPlaceholder.font = UIFont.systemFont(ofSize: 16)
+            messageTextPlaceholder.textColor = placeholderColor
+            textMessageArea.addSubview(messageTextPlaceholder)
+
+        }
 
         messageTextSendButton = UIButton()
         messageTextSendButton.frame = CGRect(

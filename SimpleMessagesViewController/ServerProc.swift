@@ -4,7 +4,6 @@ import UIKit
 class ServerProc{
     let condition = NSCondition()
     
-    //非同期処理
     func async(url:String,post:String,funcs: @escaping ([String:Any]) -> Void){
         
         var r = URLRequest(url:URL(string: url)!)
@@ -24,13 +23,11 @@ class ServerProc{
                     print(error)
                 }
             }
-            //関数実行
             funcs(parsedData)
         }
         task.resume()
     }
     
-    //同期処理
     func sync(url:String,post:String) -> [String:Any]{
         
         var r = URLRequest(url:URL(string: url)!)
@@ -61,8 +58,7 @@ class ServerProc{
         self.condition.unlock()
         return parsedData
     }
-    
-    //非同期画像処理
+
     func async_img(url:String,funcs: @escaping (UIImage) -> Void){
         
         var u:URL?
