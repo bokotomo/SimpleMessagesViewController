@@ -23,6 +23,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     let statusBarHeight = UIApplication.shared.statusBarFrame.height
     let textMessageHieght: CGFloat = 50
     let imageMessageSize: CGFloat = 200
+    let menuAreaSize: CGFloat = 220
     let userImgSize: CGFloat = 35
     var myUserId: String!
     let placeholderColor: UIColor = UIColor(red: 220/255, green:220/255, blue: 220/255, alpha: 1)
@@ -35,10 +36,11 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
     var messageTextPlaceholder: UILabel!
     var messageTextView: UITextView!
     var messageTextSendButton: UIButton!
+    var plusImage: UIImageView!
+    var plusButton: UIButton!
     var MessageReturnNum : Int = 0
     var tableAngle : Bool = true
     var MessageType : String!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +105,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             
         }else if MessageType == "camera" {
             
-            let plusImage = UIImageView()
+            plusImage = UIImageView()
             plusImage.frame = CGRect(
                 x: 10,
                 y: 15,
@@ -112,6 +114,16 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             )
             plusImage.image = UIImage(named: "plus")
             textMessageArea.addSubview(plusImage)
+            
+            plusButton = UIButton()
+            plusButton.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: 35,
+                height: textMessageArea.frame.size.height
+            )
+            plusButton.addTarget(self, action: #selector(SimpleMessagesViewController.showMenuButton(_:)), for: .touchUpInside)
+            textMessageArea.addSubview(plusButton)
     
             messageTextView = UITextView()
             messageTextView.frame = CGRect(
@@ -295,7 +307,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                     imageview_area2.layer.cornerRadius = 10
                     imageview2.image = img
                     
-                    imageview2.frame = CGRect(x: 0,y: 0 ,width: self.imageMessageSize, height: self.imageMessageSize)
+                    imageview2.frame = CGRect(x: 0,y: 0,width: self.imageMessageSize, height: self.imageMessageSize)
                     cell.contentView.addSubview(imageview_area2)
                     imageview_area2.addSubview(imageview2)
                 })
@@ -308,7 +320,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
                     imageview_area.layer.cornerRadius = self.userImgSize/2
                     imageview.image = img
                     
-                    imageview.frame = CGRect(x: 0,y: 0 ,width: self.userImgSize,height: self.userImgSize)
+                    imageview.frame = CGRect(x: 0, y: 0, width: self.userImgSize,height: self.userImgSize)
                     cell.contentView.addSubview(imageview_area)
                     imageview_area.addSubview(imageview)
                 })
@@ -359,13 +371,9 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
 
         let keyboardRect = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         UIView.animate(withDuration: 0.25, animations: {
-            
             self.tableView.frame.origin.y = -(keyboardRect?.size.height)! + self.statusBarHeight
-
             self.textMessageArea.frame.origin.y = self.view.frame.height - 50  - (keyboardRect?.size.height)!
-           
         }, completion: nil)
-        
     }
 
     func hideKeyboard(_ notification: Foundation.Notification) {
@@ -419,7 +427,7 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         }
         return true
     }
-
+    
     func sendTextMessageButton(_ button: UIButton!) {
         if(messageTextView.text != ""){
             let nowClock: String = getNowClockString()
@@ -433,6 +441,10 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
             
             view.endEditing(true)
         }
+    }
+    
+    func showMenuButton(_ button: UIButton!) {
+        
     }
 
     func getNowClockString() -> String {
