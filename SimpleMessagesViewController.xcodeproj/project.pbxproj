@@ -14,6 +14,7 @@
 		CD274A471DEB193200677BD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD274A451DEB193200677BD4 /* LaunchScreen.storyboard */; };
 		CD274A4F1DEB1BC900677BD4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CD274A4E1DEB1BC900677BD4 /* README.md */; };
 		CD50CD271DF86DBB00395FE4 /* ServerProc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50CD261DF86DBB00395FE4 /* ServerProc.swift */; };
+		CD7E04D61E251B6D008B90E2 /* SimpleMessangerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7E04D51E251B6D008B90E2 /* SimpleMessangerController.swift */; };
 		CDE50A6B1DEEED250034D978 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE50A6A1DEEED250034D978 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		CD274A481DEB193200677BD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD274A4E1DEB1BC900677BD4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CD50CD261DF86DBB00395FE4 /* ServerProc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerProc.swift; sourceTree = "<group>"; };
+		CD7E04D51E251B6D008B90E2 /* SimpleMessangerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMessangerController.swift; sourceTree = "<group>"; };
 		CDE50A6A1DEEED250034D978 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 		CDD017DF1DF7AD28005DC46A /* SimpleMessanger */ = {
 			isa = PBXGroup;
 			children = (
+				CD7E04D51E251B6D008B90E2 /* SimpleMessangerController.swift */,
 			);
 			name = SimpleMessanger;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				CD274A4F1DEB1BC900677BD4 /* README.md in Sources */,
 				CD274A3F1DEB193200677BD4 /* SimpleMessagesViewController.swift in Sources */,
 				CD274A3D1DEB193200677BD4 /* AppDelegate.swift in Sources */,
+				CD7E04D61E251B6D008B90E2 /* SimpleMessangerController.swift in Sources */,
 				CDE50A6B1DEEED250034D978 /* MainViewController.swift in Sources */,
 				CD50CD271DF86DBB00395FE4 /* ServerProc.swift in Sources */,
 			);
