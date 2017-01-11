@@ -51,7 +51,10 @@ class SimpleMessagesViewController: UIViewController, UITableViewDelegate, UITab
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SimpleMessagesViewController.dismissKeyBoard))
         view.addGestureRecognizer(tap)
-        
+      
+      let simpleMessangerController = SimpleMessangerController()
+      simpleMessangerController.messageType = "camera"
+      
         MessageType = "normal"
         MessageType = "camera"
 

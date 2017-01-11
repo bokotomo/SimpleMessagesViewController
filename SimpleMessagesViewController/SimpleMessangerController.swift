@@ -7,9 +7,10 @@
 //
 
 class SimpleMessangerController{
+  public var messageType: String!
   
   func test(){
-    print("ok")
+    print("ok!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
   }
   
 }
